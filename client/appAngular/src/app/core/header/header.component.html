@@ -1,0 +1,87 @@
+<!--<p>
+  <mat-toolbar>
+    <mat-toolbar-row >
+      <img alt="ElAtardecer Logo" src="./assets/images/atardecer_naranja sin fondo.png" />
+      <span>El Atadercer</span>
+      <span class="example-spacer"></span>
+      <button
+        mat-icon-button
+        class="example-icon"
+        aria-hidden="false"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</p>
+<a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
+    <svg id="twitter-logo" height="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+      <rect width="400" height="400" fill="none"/>
+      
+    </svg>
+  </a>-->
+  <p>
+    <mat-toolbar>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu1"
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <img alt="ElAtardecer Logo" src="./assets/images/atardecer_naranja sin fondo.png" />
+      <span>El Atardecer</span>
+      <!-- Menu #1 -->
+      <mat-menu #menu1="matMenu">
+        <button
+          mat-menu-item
+          [routerLink]="'/'"
+          routerLinkActive="mat-raised-button"
+        >
+          Inicio
+        </button>
+        <button mat-menu-item [routerLink]="'/residencias'" [routerLinkActive]="'mat-raised-button'">Residencias</button>
+        <button mat-menu-item
+        [routerLink]="'/home/acerca-de'"
+          routerLinkActive="mat-raised-button"
+        >Acerca De</button>
+        <button mat-menu-item [routerLink]="'/plan'" [routerLinkActive]="'mat-raised-button'">Planes</button>
+        <button mat-menu-item [routerLink]="'/gestion'" [routerLinkActive]="'mat-raised-button'">Gestion</button>
+      </mat-menu>
+      <!-- Menu #2  
+      <mat-menu #menu2="matMenu">
+        <button mat-menu-item [routerLink]="'/videojuego/all'" [routerLinkActive]="'mat-raised-button'">Listado</button>
+      </mat-menu>-->
+      <div class="example-button-container" align="end">
+        
+      </div>
+      <div class="example-spacer" >
+        
+      </div>
+      <div class="example-spacer" >
+        <!-- Carrito de compras -->
+        <button mat-icon-button matBadgeColor="accent" [matBadge]="1" 
+         [routerLink]="'/orden'" [routerLinkActive]="'mat-raised-button'"  aria-label="Cantidad">
+       <mat-icon>shopping_cart</mat-icon>
+     </button> |   
+      <!-- Gestion de Usuarios -->
+        <span class="mat-caption" *ngIf="isAutenticated"> {{currentUser.email}}</span> 
+      <button mat-icon-button [matMenuTriggerFor]="menu3">
+        <mat-icon [ngStyle]="{'color' : isAutenticated ? 'white' : '#9E9E'}" >person</mat-icon>
+      </button>
+      
+      <mat-menu #menu3="matMenu">
+        <a mat-menu-item  *ngIf="!(isAutenticated)" (click)="login()">
+          <mat-icon>person_add</mat-icon>
+          <span> Login </span> 
+        </a>
+        <a mat-menu-item *ngIf="isAutenticated" (click)="logout()">
+          <mat-icon>person_remove</mat-icon>
+          <span> Logout </span>
+        </a>
+      </mat-menu>
+    </div>
+    </mat-toolbar>
+    </p>

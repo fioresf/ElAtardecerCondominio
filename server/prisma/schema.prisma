@@ -1,0 +1,158 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+//aqui va el esquema de my DB
+
+//------------------Tabla Rol--------------------------------
+model Rol{
+  id Int @id @default(autoincrement())
+  descripcion String
+
+  //Relaciones con otras tablas
+  cliente Cliente[]
+}
+
+//----------------Tabla Cliente-------------------------------
+model Cliente{
+  id Int @id @default(autoincrement())
+  correo String 
+  nombre String
+  apellidos String
+  clave String
+  idRol Int 
+  estado String
+  
+  //Relaciones otras tablas
+  rol Rol @relation(fields: [idRol], references: [id]) 
+  infoIncidencias InfoIncidencias[]   
+  residencia Residencias[] //se maneja como 1 a 1
+  reserva Reserva[]                         
+}
+
+//----------------Tabla Tipo incidencia------------------------
+model TipoIncidencia{
+  id Int @id @default(autoincrement())
+  descripcion String
+
+  //Relaciones con otras tablas
+  infoIncidencias InfoIncidencias[]
+  } 
+
+//---------------Tabla InfoIncidencias--------------------------
+model InfoIncidencias{
+  idIncidencia Int @id @default(autoincrement())
+  idCliente Int? 
+  idTipoIncidencia Int?  //las que el usuario elige 
+  tipoInformacion String? //Aviso,Noticia, acta etc
+  mensaje String
+  //agregar imagen puede ser nulo
+  imagen String?
+  estado String //default solicitud
+
+  //Relaciones con otras tablas
+  cliente Cliente? @relation(fields: [idCliente], references: [id])
+  tipoIncidencia TipoIncidencia? @relation(fields: [idTipoIncidencia],references: [id])
+}
+
+//-------------Tabla Horario--------------------------------------
+ model Horario{
+  idHorario Int  @id @default(autoincrement())
+  horaInicio   DateTime 
+  horaFin DateTime
+  idArea Int
+  estado String
+  
+
+  //Relaciones con otras tablas
+  area AreasReserva @relation(fields: [idArea],references: [idArea])
+  reserva Reserva[]
+}
+
+//----------Tabla AreasReserva----------------------------------
+model AreasReserva{
+  idArea Int @id @default(autoincrement())
+  imagen String?
+  descripcion String
+  disponibilidad String
+  precio Decimal  @db.Decimal(10, 2)
+  estado String
+
+  //Relaciones con otras tablas
+  horarios Horario[]
+}
+
+
+//-----------Tabla Residencias------------------------------------
+model Residencias{
+  idResidencia  Int @id @default(autoincrement())
+  idCondominio Int 
+  idCliente Int
+  cantidadPersonas Int
+  annoInicio   DateTime  @default(now())
+  cantidadCarros Int
+  estado String
+
+  //Relaciones con otras tablas
+  cliente Cliente @relation(fields: [idCliente], references: [id]) 
+  gestiones Gestion[]
+}
+
+//-------------------------Tabla Rubros------------------------------
+model Rubros{
+  idRubros Int @id @default(autoincrement())
+  descripcion String
+  cobro Decimal  @db.Decimal(10, 2)
+
+  //Relaciones con otras tablas
+  plan Plan[]
+
+}
+
+//----------------------Tabla Plan------------------------------------
+model Plan{
+  idPlan Int @id @default(autoincrement())
+  Descripcion String
+  total Decimal  @db.Decimal(10, 2)
+
+  //Relaciones con otras tablas
+  gestiones Gestion[]
+  rubros Rubros[]
+}
+
+//--------------------Tabla RubrosPlan---------------------------------
+//Se crea automaticamente por prisma con representacion A y B
+
+//----------------------Tabla Gestion----------------------------------
+model Gestion{
+  idGestion Int @id @default(autoincrement())
+  idResidencia Int
+  idPlan Int
+  fecha DateTime @default(now())
+  estado String
+  deuda Decimal  @db.Decimal(10, 2)
+
+  ///Relaciones con otras tablas
+  plan Plan @relation(fields: [idPlan], references: [idPlan])
+  residencia Residencias @relation(fields: [idResidencia], references: [idResidencia])
+}
+
+//------------------------------Tabla Reserva-----------------------------
+model Reserva{
+    idReserva Int @id @default(autoincrement())
+    idCliente Int 
+    idHorario Int 
+    total Decimal  @db.Decimal(10, 2)
+    estado String
+
+    //Relaciones con otras tablas
+    cliente Cliente @relation(fields: [idCliente], references: [id]) 
+    horario Horario @relation(fields: [idHorario], references: [idHorario]) 
+}

@@ -1,0 +1,55 @@
+<div class="titulo"><h1>Lista de Residencias</h1></div>
+  
+<ng-container *ngIf="datos">
+    <div class="card-container">
+      <mat-card *ngFor="let item of datos" class="card">
+        <img
+          mat-card-image
+          src="./assets/images/residencia.jpg"
+          alt="FotoResidencia"
+        />
+        <br>
+        <mat-card-content>
+            <mat-card-title class="centered">Residencia {{ item.idResidencia }}</mat-card-title>
+               
+          <mat-list class="my-list">
+            <mat-list-item class="my-list-item">
+                <mat-icon mat-list-icon>person</mat-icon>
+                <span mat-line mat-small>Propietario: {{ item.cliente.nombre }}
+                    {{ item.cliente.apellidos }}</span>
+                </mat-list-item>
+            <mat-list-item class="my-list-item">
+              <mat-icon mat-list-icon>calendar_month</mat-icon>
+              <span mat-line mat-small>Año de Inicio: {{ item.annoInicio | date : "MMM d, y" }}</span
+              >
+            </mat-list-item>
+            <mat-list-item class="my-list-item">
+              <mat-icon mat-list-icon>directions_car</mat-icon>
+              <span mat-line mat-small>Cantidad de Carros: {{ item.cantidadCarros }}</span>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+        <mat-card-content class="button-container">
+            <section>
+                <div class="example-button-row">
+                  <div class="example-flex-container">
+                    <div class="example-button-container">
+                      <button mat-fab color="warn" aria-label="Detalle Residencia" 
+                      (click)="detalleResidencia(item.idResidencia)">
+                        <mat-icon>info</mat-icon>
+                      </button>
+                    </div>
+                    <div class="example-button-container">
+                      <button mat-fab color="warn" aria-label="Example icon button with a edit icon">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+        </mat-card-content>
+    </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-container>

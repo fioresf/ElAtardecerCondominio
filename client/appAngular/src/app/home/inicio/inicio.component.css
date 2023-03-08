@@ -1,0 +1,20 @@
+mat-card {
+    max-width: 400px;
+    margin: 2em auto;
+    text-align: center;
+    color: #fff;
+    border: 1px solid black;;
+    }
+
+    img{
+        background-color: #fff;
+    }
+    mat-card-header, mat-card-content{
+        text-align: center;
+        background-color: #fff;
+        background-color:#fcaf58;
+        background-color:#06132f;
+    }
+    mat-card-title{
+        text-align: center;  
+    }

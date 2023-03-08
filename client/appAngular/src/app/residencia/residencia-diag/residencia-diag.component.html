@@ -1,0 +1,65 @@
+<div class="contenedorX">
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+</div>
+<div class="contenedor" *ngIf="datos">
+  <h2 mat-dialog-title class="titulo">
+    Detalle Residencia {{ datos.idResidencia }}
+  </h2>
+  <h3 mat-dialog-title class="titulo">
+    Información del Condominio {{ datos.idCondominio }}
+  </h3>
+  <mat-dialog-content>
+    <mat-list class="my-list">
+      <mat-list-item class="my-list-item">
+        <mat-icon mat-list-icon>person</mat-icon>
+        <span mat-line mat-small
+          >Cantidad de personas: {{ datos.cantidadPersonas }}</span
+        >
+      </mat-list-item>
+      <mat-list-item class="my-list-item">
+        <mat-icon mat-list-icon>calendar_month</mat-icon>
+        <span mat-line mat-small
+          >Año de Inicio: {{ datos.annoInicio | date : "MMM d, y" }}</span
+        >
+      </mat-list-item>
+      <mat-list-item class="my-list-item">
+        <mat-icon mat-list-icon>directions_car</mat-icon>
+        <span mat-line mat-small
+          >Cantidad de carros: {{ datos.cantidadCarros }}</span
+        >
+      </mat-list-item>
+      <mat-list-item class="my-list-item">
+        <mat-icon mat-list-icon>construction</mat-icon>
+        <span mat-line mat-small>Estado Residencia: {{ datos.estado }}</span>
+      </mat-list-item>
+    </mat-list>
+    <mat-divider></mat-divider>
+    <mat-progress-bar color="warn" mode="indeterminate"></mat-progress-bar>
+    <h2 mat-dialog-title class="titulo">Información del Propietario</h2>
+
+    <mat-list class="my-list">
+      <mat-list-item class="my-list-item">
+        <mat-icon mat-list-icon>badge</mat-icon>
+        <span mat-line mat-small>ID del Cliente: {{ datos.cliente.id }}</span>
+      </mat-list-item>
+      <mat-list-item class="my-list-item">
+        <mat-icon mat-list-icon>mail</mat-icon>
+        <span mat-line mat-small>Correo: {{ datos.cliente.correo }}</span>
+      </mat-list-item>
+      <mat-list-item class="my-list-item">
+        <mat-icon mat-list-icon>person</mat-icon>
+        <span mat-line mat-small
+          >Nombre Completo: {{ datos.cliente.nombre }}
+          {{ datos.cliente.apellidos }}</span
+        >
+      </mat-list-item>
+      <mat-list-item class="my-list-item">
+        <mat-icon mat-list-icon>home</mat-icon>
+        <span mat-line mat-small>Estado: {{ datos.cliente.estado }}</span>
+      </mat-list-item>
+    </mat-list>
+  </mat-dialog-content>
+  <mat-dialog-actions> </mat-dialog-actions>
+</div>

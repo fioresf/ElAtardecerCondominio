@@ -1,0 +1,52 @@
+<div class="titulo"><h1>Lista de Planes</h1></div>
+  
+<ng-container *ngIf="datos">
+    <div class="card-container">
+      <mat-card *ngFor="let item of datos" class="card">
+        <img
+          mat-card-image
+          src="./assets/images/planFoto.png"
+          alt="FotoResidencia"
+        />
+        <br>
+        <mat-card-content>
+            <mat-card-title class="centered">Plan {{ item.idPlan }}</mat-card-title>
+               
+          <mat-list class="my-list">
+            <mat-list-item class="my-list-item">
+                <mat-icon mat-list-icon><span class="material-symbols-outlined">
+                  description
+                  </span></mat-icon>
+                <span mat-line mat-small>Descripción: {{ item.Descripcion }}</span>
+                </mat-list-item>
+            <mat-list-item class="my-list-item">
+              <mat-icon mat-list-icon>credit_card</mat-icon>
+              <span mat-line mat-small>Total: {{ item.total | currency: '₡' }}</span
+              >
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+        <mat-card-content class="button-container">
+            <section>
+                <div class="example-button-row">
+                  <div class="example-flex-container">
+                    <div class="example-button-container">
+                      <button mat-fab color="warn" aria-label="Detalle Plan" 
+                      (click)="detallePlan(item.idPlan)">
+                        <mat-icon>info</mat-icon>
+                      </button>
+                    </div>
+                    <div class="example-button-container">
+                      <button mat-fab color="warn" aria-label="Example icon button with a edit icon">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+        </mat-card-content>
+    </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-container>

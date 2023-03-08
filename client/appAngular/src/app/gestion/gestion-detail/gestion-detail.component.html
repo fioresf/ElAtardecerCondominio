@@ -1,0 +1,110 @@
+<!--
+<div class="contenedor" *ngIf="datos">
+  <mat-card class="dashboard-card" *ngFor="let item of datos">
+    <mat-card-header>
+      <mat-card-title>Estado de Cuenta</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="dashboard-card-content">
+      <mat-card-title>Informacion de Residencia </mat-card-title>
+      <mat-card-title>Residencia {{ item.idResidencia }}</mat-card-title>
+      <mat-card-title>Gestion {{ item.idGestion }}</mat-card-title>
+      <p>
+        <b>Año Inicio: </b>{{ item.residencia.annoInicio | date : "MMM d, y" }} 
+      </p>
+      <p>
+        <b>Propietario: </b>{{ item.residencia.cliente.nombre }}
+        {{ item.residencia.cliente.apellidos }}
+      </p>
+      <p>
+        <b>Correo: </b>{{ item.residencia.cliente.correo }} 
+      </p>
+      <mat-card-title *ngIf="validaTitulo(item.estado)">{{titulo}}</mat-card-title>
+        <p>
+          <b>Plan: </b>{{ item.idPlan }} 
+        </p>
+        <p>
+          <b>Fecha: </b>{{ item.fecha | date : "MMM d, y" }} 
+        </p>
+        <p>
+          <b>Plan: </b>{{ item.plan.total | currency : "₡" }} 
+        </p>
+        <p>
+          <b>Estado: </b>{{ item.estado }} 
+        </p>
+    </mat-card-content>
+  </mat-card>
+</div>-->
+<br>
+<ng-container *ngIf="datos">
+  <div class="titulo"><h1>Estados de Cuentas de Residencia</h1></div>
+  <div class="card-container">
+    <mat-card *ngFor="let item of datos" class="card">
+      <br />
+      <mat-card-content>
+        <mat-list class="my-list">
+          <mat-list-item class="my-list-item">
+            <mat-card-title class="centered"
+              >Residencia # {{ item.idResidencia }}</mat-card-title
+            >
+          </mat-list-item>
+          <mat-card-title class="title" >Información de Residencia</mat-card-title>
+          <!-- <mat-list-item class="my-list-item">
+             <mat-icon mat-list-icon>credit_card</mat-icon>
+           <span mat-line mat-small>Gestion: {{ item.idGestion }}</span>
+          </mat-list-item>-->
+          <mat-list-item class="my-list-item">
+            <mat-icon mat-list-icon>person</mat-icon>
+            <span mat-line mat-small
+              >Propietario: {{ item.residencia.cliente.nombre }}
+              {{ item.residencia.cliente.apellidos }}</span
+            >
+          </mat-list-item>
+          <mat-list-item class="my-list-item">
+            <mat-icon mat-list-icon>mail</mat-icon>
+            <span mat-line mat-small
+              >Correo: {{ item.residencia.cliente.correo }}
+            </span>
+          </mat-list-item>
+          <br />
+          <mat-progress-bar
+            color="warn"
+            mode="indeterminate"
+          ></mat-progress-bar>
+          <br />
+          <!--Deudas Vigentes-->
+          <mat-card-title class="centered" *ngIf="validaTitulo(item.estado)">{{
+            titulo
+          }}</mat-card-title>
+          <mat-list-item class="my-list-item">
+            <mat-icon mat-list-icon>info</mat-icon>
+            <span mat-line mat-small>{{ item.idPlan }} -  {{item.plan.Descripcion}} </span>
+          </mat-list-item>
+          <mat-list-item class="my-list-item">
+            <mat-icon mat-list-icon>calendar_month</mat-icon>
+            <span mat-line mat-small
+              >Fecha: {{ item.fecha | date : "MMM d, y" }}
+            </span>
+          </mat-list-item>
+          <mat-list-item class="my-list-item">
+            <mat-icon mat-list-icon
+              ><span class="material-symbols-outlined">
+                monetization_on
+              </span></mat-icon
+            >
+            <span mat-line mat-small
+              >Total: {{ item.plan.total | currency : "₡" }}
+            </span>
+          </mat-list-item>
+          <mat-list-item class="my-list-item">
+            <mat-icon mat-list-icon
+              ><span class="material-symbols-outlined">
+                edit_document
+              </span></mat-icon
+            >
+            <span mat-line mat-small>Estado: {{ item.estado }} </span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-container>

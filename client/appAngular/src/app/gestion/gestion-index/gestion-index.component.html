@@ -1,0 +1,83 @@
+<mat-card class="full-width">
+  <br />
+  <!-- Titulo del Card -->
+  <mat-card-title class="titulo"> Estados de Cuenta </mat-card-title>
+  <br />
+  <mat-card-content>
+    <div class="mat-elevation-z8" *ngIf="dataSource">
+      <!-- Table -->
+      <table
+        mat-table
+        class="full-width-table"
+        [dataSource]="dataSource"
+        matSort
+        matSortStart="desc"
+        aria-label="Elements"
+      >
+        <!-- Columna nombre -->
+        <ng-container matColumnDef="residencia">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Número de Residencia
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.idResidencia }}</td>
+        </ng-container>
+
+        <!-- Columna precio -->
+        <ng-container matColumnDef="cliente">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Propietario</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.residencia.cliente.nombre }}
+            {{ row.residencia.cliente.apellidos }}
+          </td>
+        </ng-container>
+        <!-- Columna Fecha -->
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.fecha | date : "MMM d, y" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <button
+              mat-mini-fab
+              matTooltip="Actualizar Gestion"
+              aria-label="Actualizar Gestion"
+              color="warn"
+            >
+              <mat-icon class="mat-18">edit</mat-icon>
+            </button>
+            <button
+              mat-mini-fab
+              matTooltip="Detalle Gestion"
+              aria-label="Detalle Gestion"
+              color="warn"
+              (click)="detalleGestion(row.idResidencia)"
+            >
+              <mat-icon class="mat-18">info</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <mat-paginator
+        #paginator
+        [length]="dataSource?.data?.length"
+        [pageIndex]="0"
+        [pageSize]="5"
+        [pageSizeOptions]="[3, 5, 10]"
+        aria-label="Seleccione una pagina"
+      >
+      </mat-paginator>
+      <!-- Table -->
+    </div>
+  </mat-card-content>
+</mat-card>

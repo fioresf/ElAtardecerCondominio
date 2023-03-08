@@ -1,0 +1,36 @@
+
+.my-list {
+    padding: 10px;
+  }
+  
+  .my-list-item {
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .my-list-item mat-icon {
+    margin-right: 10px;
+  }
+
+  mat-list-item span.mat-line {
+    font-size: 14px;
+  }
+
+  .titulo{
+    text-align: center;
+  }
+  .contenedor, .contenedorX{
+    background-color: #06132f;
+  }
+
+  /*Titulo*/
+
+.titulo {
+    text-align: left; 
+    font-family: Arial; 
+    font-size: 20px; 
+    color: #fff; 
+    text-shadow: 0px 0px 9px #fcaf58;
+    text-align: center;
+    }
+    

@@ -1,0 +1,52 @@
+<div class="contenedorX">
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+      <mat-icon class="close-icon" color="warn">close</mat-icon>
+    </button>
+    </div>
+    <div class="contenedor" *ngIf="datos">
+      <h2 mat-dialog-title class="titulo">
+        Detalle Plan {{ datos.idPlan }}
+      </h2>
+      <h3 mat-dialog-title class="titulo">
+        Información del Plan 
+      </h3>
+      <mat-dialog-content >
+        <mat-list class="my-list">
+          <mat-list-item class="my-list-item">
+            <mat-icon mat-list-icon>description</mat-icon>
+            <span mat-line mat-small
+              >Descripción: {{ datos.Descripcion }}</span
+            >
+          </mat-list-item>
+          <mat-list-item class="my-list-item">
+            <mat-icon mat-list-icon>credit_card</mat-icon>
+            <span mat-line mat-small
+              >Total: {{ datos.total | currency:'₡'}}</span
+            >
+          </mat-list-item>
+        </mat-list>
+        <mat-divider></mat-divider>
+        <mat-progress-bar color="warn" mode="indeterminate"></mat-progress-bar>
+        <h2 mat-dialog-title class="titulo">Información del Rubro</h2>
+    
+        <mat-list class="my-list" *ngFor="let item of datos.rubros" >
+          <mat-list-item class="my-list-item">
+            <mat-icon mat-list-icon>badge</mat-icon>
+            <span mat-line mat-small>Rubro {{ item.idRubros }}</span>
+          </mat-list-item>
+          <mat-list-item class="my-list-item">
+            <mat-icon mat-list-icon>description</mat-icon>
+            <span mat-line mat-small>Descripción: {{ item.descripcion }}</span>
+          </mat-list-item>
+          <mat-list-item class="my-list-item">
+            <mat-icon mat-list-icon>credit_card</mat-icon>
+            <span mat-line mat-small
+              >Cobro: {{ item.cobro | currency:'₡'}}
+              </span >
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </mat-dialog-content>
+      <mat-dialog-actions> </mat-dialog-actions>
+    </div>
+    

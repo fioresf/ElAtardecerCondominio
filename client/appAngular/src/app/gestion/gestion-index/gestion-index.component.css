@@ -1,0 +1,20 @@
+.full-width-table {
+    width: 100%;
+    background-color: #06132f;
+  }
+  mat-paginator{
+    background-color: #06132f;
+  }
+  .full-width{
+    background-color:  #06132f;
+    /*#4e598c;*/
+  }
+  
+.titulo {
+  text-align: left; 
+  font-family: Arial; 
+  font-size: 30px; 
+  color: #ff8c42; 
+  text-shadow: 0px 0px 9px #fcaf58;
+  text-align: center;
+  }
